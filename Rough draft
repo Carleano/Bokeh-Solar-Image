@@ -1,0 +1,36 @@
+#Rough draft when I was just trying to display the image data on an HTML server
+import numpy as np
+from astropy.io import fits	
+import matplotlib.pyplot as plt 
+from IPython.display import Audio
+import os
+import math
+from scipy.io.wavfile import read, write
+from scipy.signal import argrelextrema
+from IPython.display import Audio
+import warnings
+from bokeh.io import show
+from bokeh.models import LogColorMapper
+from bokeh.palettes import Viridis6 as palette
+from bokeh.plotting import figure, show, output_file
+output_file('image.html')
+#import librosa
+ 
+#Read In image
+ninety_four_image=fits.getdata('aia.lev1.94A_2011-06-15T17_00_02.12Z.image_lev1.fits')
+#Threshold to avoid nan and -inf values in array when using Log10
+ninety_four_image[ninety_four_image <= 0] = .000000001
+log_org = np.log10(ninety_four_image)
+#Rebin function, method for interpolation is averaging. Returns resized array
+def rebin(arr, new_shape):
+    shape = (new_shape[0], arr.shape[0] // new_shape[0],
+             new_shape[1], arr.shape[1] // new_shape[1])
+    return arr.reshape(shape).mean(-1).mean(1)
+log_org = rebin(log_org, (8,8))
+#Normalize data 
+log_org = np.subtract(-1*log_org,log_org.min())
+log_org = np.divide(log_org,log_org.max())
+img = log_org
+p = figure(plot_width=400, plot_height=400, x_range=(0, 10), y_range=(0, 10))
+p.image(img, x=8, y=8, dw=8, dh=8, global_alpha=1.0, dilate=False)
+show(p)

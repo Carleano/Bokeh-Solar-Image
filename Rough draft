@@ -1,4 +1,4 @@
-#Rough draft when I was just trying to display the image data on an HTML server
+#This will show the image in a bokeh figure. Obviously the fits file is needed locally. I think the next step is adding the hover tool
 import numpy as np
 from astropy.io import fits	
 import matplotlib.pyplot as plt 
@@ -13,7 +13,7 @@ from bokeh.io import show
 from bokeh.models import LogColorMapper
 from bokeh.palettes import Viridis6 as palette
 from bokeh.plotting import figure, show, output_file
-output_file('image.html')
+
 #import librosa
  
 #Read In image
@@ -31,6 +31,7 @@ log_org = rebin(log_org, (8,8))
 log_org = np.subtract(-1*log_org,log_org.min())
 log_org = np.divide(log_org,log_org.max())
 img = log_org
-p = figure(plot_width=400, plot_height=400, x_range=(0, 10), y_range=(0, 10))
-p.image(img, x=8, y=8, dw=8, dh=8, global_alpha=1.0, dilate=False)
+p = figure(plot_width=400, plot_height=400, x_range=(-10, 10), y_range=(-10, 10))
+p.image(image = [img], x=-5, y=-5, dw=10, dh=10, global_alpha=1.0, dilate=False, palette='Spectral11')
+output_file('image.html')
 show(p)

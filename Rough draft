@@ -11,7 +11,7 @@ import warnings
 from bokeh.io import show
 from bokeh.models import LogColorMapper
 from bokeh.palettes import Viridis6 as palette
-from bokeh.plotting import figure, show, output_file
+from bokeh.plotting import figure, show, output_file, ColumnDataSource 
 
 #import librosa
  
@@ -31,83 +31,83 @@ log_org = np.subtract(-1*log_org,log_org.min())
 log_org = np.divide(log_org,log_org.max())
 img = log_org
 source = ColumnDataSource(data=dict(
-    values=[img]
-    #y=[2, 5, 8, 2, 7],
-    #desc=['A', 'b', 'C', 'd', 'E'],
-    tones=[
-        'sonified_pixels_1.wav
-        'sonified_pixels_2.wav
-        'sonified_pixels_3.wav
-        'sonified_pixels_4.wav
-        'sonified_pixels_5.wav
-        'sonified_pixels_6.wav
-        'sonified_pixels_7.wav
-        'sonified_pixels_8.wav
-        'sonified_pixels_9.wav
-        'sonified_pixels_10.wav
-        'sonified_pixels_11.wav
-        'sonified_pixels_12.wav
-        'sonified_pixels_13.wav
-        'sonified_pixels_14.wav
-        'sonified_pixels_15.wav
-        'sonified_pixels_16.wav
-        'sonified_pixels_17.wav
-        'sonified_pixels_18.wav
-        'sonified_pixels_19.wav
-        'sonified_pixels_20.wav
-        'sonified_pixels_21.wav
-        'sonified_pixels_22.wav
-        'sonified_pixels_23.wav
-        'sonified_pixels_24.wav
-        'sonified_pixels_25.wav
-        'sonified_pixels_26.wav
-        'sonified_pixels_27.wav
-        'sonified_pixels_28.wav
-        'sonified_pixels_29.wav
-        'sonified_pixels_30.wav
-        'sonified_pixels_31.wav
-        'sonified_pixels_32.wav
-        'sonified_pixels_33.wav
-        'sonified_pixels_34.wav
-        'sonified_pixels_35.wav
-        'sonified_pixels_36.wav
-        'sonified_pixels_37.wav
-        'sonified_pixels_38.wav
-        'sonified_pixels_39.wav
-        'sonified_pixels_40.wav
-        'sonified_pixels_41.wav
-        'sonified_pixels_42.wav
-        'sonified_pixels_43.wav
-        'sonified_pixels_44.wav
-        'sonified_pixels_45.wav
+    values=[img],
+    
+    tones =        [
+        'sonified_pixels_1.wav'
+        'sonified_pixels_2.wav'
+        'sonified_pixels_3.wav'
+        'sonified_pixels_4.wav'
+        'sonified_pixels_5.wav'
+        'sonified_pixels_6.wav'
+        'sonified_pixels_7.wav'
+        'sonified_pixels_8.wav'
+        'sonified_pixels_9.wav'
+        'sonified_pixels_10.wav'
+        'sonified_pixels_11.wav'
+        'sonified_pixels_12.wav'
+        'sonified_pixels_13.wav'
+        'sonified_pixels_14.wav'
+        'sonified_pixels_15.wav'
+        'sonified_pixels_16.wav'
+        'sonified_pixels_17.wav'
+        'sonified_pixels_18.wav'
+        'sonified_pixels_19.wav'
+        'sonified_pixels_20.wav'
+        'sonified_pixels_21.wav'
+        'sonified_pixels_22.wav'
+        'sonified_pixels_23.wav'
+        'sonified_pixels_24.wav'
+        'sonified_pixels_25.wav'
+        'sonified_pixels_26.wav'
+        'sonified_pixels_27.wav'
+        'sonified_pixels_28.wav'
+        'sonified_pixels_29.wav'
+        'sonified_pixels_30.wav'
+        'sonified_pixels_31.wav'
+        'sonified_pixels_32.wav'
+        'sonified_pixels_33.wav'
+        'sonified_pixels_34.wav'
+        'sonified_pixels_35.wav'
+        'sonified_pixels_36.wav'
+        'sonified_pixels_37.wav'
+        'sonified_pixels_38.wav'
+        'sonified_pixels_39.wav'
+        'sonified_pixels_40.wav'
+        'sonified_pixels_41.wav'
+        'sonified_pixels_42.wav'
+        'sonified_pixels_43.wav'
+        'sonified_pixels_44.wav'
+        'sonified_pixels_45.wav'
         'sonified_pixels_46.wav'
-        'sonified_pixels_47.wav
-        'sonified_pixels_48.wav
-        'sonified_pixels_49.wav
-        'sonified_pixels_50.wav
-        'sonified_pixels_51.wav
-        'sonified_pixels_52.wav
-        'sonified_pixels_53.wav
-        'sonified_pixels_54.wav
-        'sonified_pixels_55.wav
-        'sonified_pixels_56.wav
-        'sonified_pixels_57.wav
-        'sonified_pixels_58.wav
-        'sonified_pixels_59.wav
-        'sonified_pixels_60.wav
-        'sonified_pixels_61.wav
-        'sonified_pixels_62.wav
-        'sonified_pixels_63.wav
-        'sonified_pixels_64.wav
-    ],
+        'sonified_pixels_47.wav'
+        'sonified_pixels_48.wav'
+        'sonified_pixels_49.wav'
+        'sonified_pixels_50.wav'
+        'sonified_pixels_51.wav'
+        'sonified_pixels_52.wav'
+        'sonified_pixels_53.wav'
+        'sonified_pixels_54.wav'
+        'sonified_pixels_55.wav'
+        'sonified_pixels_56.wav'
+        'sonified_pixels_57.wav'
+        'sonified_pixels_58.wav'
+        'sonified_pixels_59.wav'
+        'sonified_pixels_60.wav'
+        'sonified_pixels_61.wav'
+        'sonified_pixels_62.wav'
+        'sonified_pixels_63.wav'
+        'sonified_pixels_64.wav'
+    ]
+))    
 
-TOOLTIPS = [
+TOOLTIPS =[
     ("tones", "$tones"),
     ("pixel_value", "@values")
     
 ]
 
 p = figure(plot_width=400, plot_height=400, x_range=(-10, 10), y_range=(-10, 10), tooltips=TOOLTIPS)
-p.image(image = [img], x=-5, y=-5, dw=10, dh=10, global_alpha=1.0, dilate=False, palette='Magma11')
+p.image(image = [img], x=-5, y=-5, dw=10, dh=10, global_alpha=1.0, dilate=False, palette='Inferno11')
 output_file('image.html')
 show(p)

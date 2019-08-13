@@ -1,3 +1,4 @@
+#This will show the image in a bokeh figure. Obviously the fits file is needed locally. I also have the hover tool. I just need to get the audio files to play :/
 import numpy as np
 from astropy.io import fits	
 import matplotlib.pyplot as plt 

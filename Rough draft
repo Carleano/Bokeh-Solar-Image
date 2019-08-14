@@ -1,4 +1,4 @@
-#This will show the image in a bokeh figure. Obviously the fits file is needed locally. I also have the hover tool. I just need to get the audio files to play :/
+#This will show the image in a bokeh figure. Obviously the fits file is needed locally. I also have the hover tool. I made more progressand got the audo hover to work, I just need to figure out how to reference all the tones in the source.
 import numpy as np
 from astropy.io import fits	
 import matplotlib.pyplot as plt 
@@ -102,11 +102,16 @@ source = ColumnDataSource(data=dict(
     ]
 ))    
 
-TOOLTIPS =[
-    ("tones", "$tones"),
-    ("pixel_value", "@values")
-    
-]
+TOOLTIPS = """
+    <div>
+        <div>
+            <audio controls autoplay>
+              <source src="@tones" type="audio/wav">
+            ></audio controls>
+        </div>
+    </div>
+"""
+
 
 p = figure(plot_width=400, plot_height=400, x_range=(-10, 10), y_range=(-10, 10), tooltips=TOOLTIPS)
 p.image(image = [img], x=-5, y=-5, dw=10, dh=10, global_alpha=1.0, dilate=False, palette='Inferno11')

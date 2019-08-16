@@ -103,14 +103,11 @@ source = ColumnDataSource(data=dict(
 ))    
 
 TOOLTIPS ="""
-    <div>
-        <div>
+   
             <audio autoplay>
              <source src = 'sonified_pixels_1.wav' type="audio/wav">
-            ></audio>
-        </div>
-    </div>
-     (value, @image)    
+            </audio>
+        value: @image    
 """
 
 p = figure(plot_width=400, plot_height=400, x_range=(-10, 10), y_range=(-10, 10), tooltips=TOOLTIPS)
